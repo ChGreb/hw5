@@ -1,3 +1,7 @@
+//////////////////////////////////
+//  Christian Greb	2030036	//
+//  Homework5	Euler-method	//
+//////////////////////////////////
 #include<iostream>
 #include<cstdlib>
 #include<cmath>
@@ -18,15 +22,16 @@ int main(){
   
   eulerf(arrayf, N, pi, dt);
   eulerb(arrayb, N,pi,dt);
+  
   ofstream forout("forout.txt");
   ofstream backout("backout.txt");
   ofstream anaout("anaout.txt");
-  for(int i=0;i<N;i++){
-  forout << i*dt <<"\t"<< arrayf[i] << "\t" <<arrayf[N-1+i] << endl;
-  backout << i*dt <<"\t"<< arrayb[i] << "\t" <<arrayb[N-1+i] << endl;
-  anaout << i*dt << "\t" << cos(i*dt) <<endl; 
-  }
   
+    for(int i=0;i<N;i++){
+      forout << i*dt <<"\t"<< arrayf[i] << "\t" <<arrayf[N-1+i] << endl;
+      backout << i*dt <<"\t"<< arrayb[i] << "\t" <<arrayb[N-1+i] << endl;
+      anaout << i*dt << "\t" << cos(i*dt) <<endl; 
+    }
   
   forout.close();
   backout.close();
@@ -37,6 +42,7 @@ int main(){
 void eulerf(double* arrayf, const int N, const double pi, const double dt){
   arrayf[0]=1;
   arrayf[N]=0;
+  
   for(int i=1;i<N;i++){
     arrayf[i] = arrayf[N-1+i]*dt+arrayf[i-1];
     arrayf[N+i] = -arrayf[i-1]*dt+arrayf[N-1+i];
